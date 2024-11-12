@@ -1,0 +1,33 @@
+# Node.js dependencies (in both client and server)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+*.env
+
+# Logs
+logs/
+*.log
+
+# OS-specific and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.vscode/*
+
+# Build files (add for React and any other build outputs)
+client/build/
+client/dist/
+
+# Coverage directory for testing frameworks
+coverage/
+
+# Miscellaneous
+client/.next/
+server/.next/
+client/.parcel-cache/
+server/.parcel-cache/
+client/.cache/
+server/.cache/
