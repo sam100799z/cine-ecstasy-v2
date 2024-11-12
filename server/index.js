@@ -19,7 +19,7 @@ app.use(
         saveUninitialized: true,  // Save uninitialized sessions
         cookie: {
             httpOnly: true,  // Prevents JavaScript from accessing cookies
-            secure: false,  // Set to true if using HTTPS
+            secure: true,  // Set to true if using HTTPS
             maxAge: 24 * 60 * 60 * 1000 * 4,  // 1 day for session expiration
         }
     })
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors(
     {
-        credentials: true, origin: 'http://localhost:5173'
+        credentials: true, origin: '*'
     }));
 app.use(cookieParser());
 app.use(express.json())
