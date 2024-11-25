@@ -36,7 +36,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors(
     {
-        credentials: true, origin: 'http://localhost:5173'
+        credentials: true, 
+        // adding multiple origins
+        origin: 'https://cine-ecstasy-v2.vercel.app',
+        origin: 'http://localhost:5173'
     }));
 app.use(cookieParser());
 app.use(express.json())
