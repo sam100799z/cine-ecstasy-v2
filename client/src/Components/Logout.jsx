@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAuth } from '../Context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+import domain from '../domain/domain.js';
 
 const Logout = () => {
 
@@ -9,7 +10,7 @@ const Logout = () => {
 
     const logout = async () => {
         try {
-            const response = await fetch('http://localhost:3000/logout', {
+            const response = await fetch(`${domain}/logout`, {
                 method: 'POST',
                 credentials: 'include' // ensures cookies are sent with the request
             });

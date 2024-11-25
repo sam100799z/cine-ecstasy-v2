@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { Home, Login, Quiz, Dashboard, AccountSettings, Leaderboard } from "./Pages";
 import { useAuth, AuthProvider } from "./Context/AuthContext";
+import domain from "./domain/domain.js";
 
 
 
@@ -25,12 +26,12 @@ function App() {
   // calling the API and then populating the states
   const checkAuth = async () => {
     try {
-      const response = await fetch('http://localhost:3000/isAuthenticated', {
+      const response = await fetch(`${domain}/isAuthenticated`, {
         method: 'GET',
         credentials: 'include', // This ensures cookies are sent along with the request
       })
       let data = await response.json();
-      // console.log(data);
+      console.log("Auth Res in App.jsx ", data);
       let logState = data.isAuthenticated;
       let name = data.userName;
       let email = data.userEmail;
@@ -53,7 +54,7 @@ function App() {
 
   const fetchUserRanks = async () => {
     try {
-      const cityResponse = await fetch(`http://localhost:3000/api/leaderboard?region=city&value=${userCity}`, {
+      const cityResponse = await fetch(`${domain}/api/leaderboard?region=city&value=${userCity}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -70,7 +71,7 @@ function App() {
     }
 
     try {
-      const stateResponse = await fetch(`http://localhost:3000/api/leaderboard?region=state&value=${userState}`, {
+      const stateResponse = await fetch(`${domain}/api/leaderboard?region=state&value=${userState}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -87,7 +88,7 @@ function App() {
     }
 
     try {
-      const airResponse = await fetch(`http://localhost:3000/api/leaderboard?region=country&value=country`, {
+      const airResponse = await fetch(`${domain}/api/leaderboard?region=country&value=country`, {
         method: 'GET',
         credentials: 'include',
       });

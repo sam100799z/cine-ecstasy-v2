@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import domain from '../domain/domain.js';
 
 const Home = () => {
     const [triviaData, setTriviaData] = useState(null);
@@ -13,7 +14,7 @@ const Home = () => {
         // Call the authentication check endpoint
         const checkAuthentication = async () => {
             try {
-                const response = await fetch('http://localhost:3000/isAuthenticated', {
+                const response = await fetch(`${domain}/isAuthenticated`, {
                     method: 'GET',
                     credentials: 'include', // This ensures cookies are sent along with the request
                 });

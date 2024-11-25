@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 import QuitQuiz from '../Components/QuitQuiz';
-
+import domain from '../domain/domain.js';
 const Quiz = () => {
   const navigate = useNavigate();
   const [warnings, setWarnings] = useState(0);
@@ -69,7 +69,7 @@ const Quiz = () => {
 
 
   const answer = async () => {
-    await fetch('http://localhost:3000/answer', {
+    await fetch(`${domain}/answer`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ const Quiz = () => {
   const fetchTriviaData = async () => {
     setFeedbackText(''); // Reset feedback text
     try {
-      const response = await fetch('http://localhost:3000/quiz',
+      const response = await fetch(`${domain}/quiz`,
         {
           method: 'POST',
           headers: {

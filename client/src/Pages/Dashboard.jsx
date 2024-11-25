@@ -4,6 +4,7 @@ import { useAuth } from '../Context/AuthContext';
 import Logout from '../Components/Logout';
 import user from '../assets/user.png'
 import leaderboard from '../assets/podium.png'
+import domain from '../domain/domain.js';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Dashboard = () => {
 
     const fetchQuizHistory = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/quiz-history',
+            const response = await fetch(`${domain}/api/quiz-history`,
                 {
                     method: 'POST',
                     headers: {
@@ -168,7 +169,7 @@ const Dashboard = () => {
                     const isConfirmed = window.confirm("Do not switch any tabs or windows or open any new ones.");
 
                     if (isConfirmed) {
-                        await fetch('http://localhost:3000/reset-session', { method: 'POST', credentials: 'include' });
+                        await fetch(`${domain}/reset-session`, { method: 'POST', credentials: 'include' });
                         navigate('/quiz', { replace: true });
                     } else {
                         alert("You are still in the dashboard.");

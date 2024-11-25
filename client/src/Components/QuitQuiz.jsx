@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import domain from '../domain/domain.js';
 
 const QuitQuiz = () => {
 
@@ -10,7 +11,7 @@ const QuitQuiz = () => {
 
         if (!isConfirmed) return; // Exit if the user cancels the dialog
         try {
-            const response = await fetch('http://localhost:3000/reset-session', {
+            const response = await fetch(`${domain}/reset-session`, {
                 method: 'POST',
                 credentials: 'include'
             })

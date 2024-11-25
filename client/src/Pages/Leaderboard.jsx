@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Context/AuthContext';
 import backButton from '../assets/left-arrow.png';
 import { useNavigate } from 'react-router-dom';
-
+import domain from '../domain/domain.js';
 const Leaderboard = () => {
 
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Leaderboard = () => {
 
     const fetchLeaderboard = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/leaderboard?region=${region}&value=${region === 'city' ? userCity : region === 'state' ? userState : 'country'}`, {
+            const response = await fetch(`${domain}/api/leaderboard?region=${region}&value=${region === 'city' ? userCity : region === 'state' ? userState : 'country'}`, {
                 method: 'GET',
                 credentials: 'include', // To send cookies along with the request
             });

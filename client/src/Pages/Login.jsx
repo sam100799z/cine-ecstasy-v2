@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import LocationDropdown from '../Components/LocationDropdown';
+import domain from '../domain/domain.js';
 
 const Login = () => {
   const { register, handleSubmit, setValue } = useForm();
@@ -19,7 +20,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const endpoint = signIn ? 'register' : 'login';
-    const response = await fetch(`http://localhost:3000/${endpoint}`, {
+    const response = await fetch(`${domain}/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,6 +31,8 @@ const Login = () => {
     });
 
     const result = await response.json();
+    
+    console.log("Login Response ", result); 
 
     if (result.success) {
       navigate('/dashboard');

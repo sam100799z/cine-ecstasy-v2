@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import domain from '../domain/domain.js';
 
 const AccountSettings = () => {
 
@@ -15,7 +16,7 @@ const AccountSettings = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/user', {
+      const response = await fetch(`${domain}/api/user`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email }),
@@ -40,7 +41,7 @@ const AccountSettings = () => {
     e.preventDefault();
     if (password === confirmPassword) return alert("You are not entering a different password.");
     try {
-      const response = await fetch('http://localhost:3000/api/user/password', {
+      const response = await fetch(`${domain}/api/user/password`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password, confirmPassword }),
@@ -58,7 +59,7 @@ const AccountSettings = () => {
   const handleDeleteAccount = async () => {
     if (!window.confirm("Are you sure you want to delete your account?")) return;
     try {
-      const response = await fetch('http://localhost:3000/api/user', { method: 'DELETE', credentials: 'include' });
+      const response = await fetch(`${domain}/api/user`, { method: 'DELETE', credentials: 'include' });
       const data = await response.json();
       if (data.success) alert("Account deleted successfully!");
       navigate('/');
