@@ -701,7 +701,8 @@ app.post('/login', async (req, res) => {
             // Step 5: Respond with success message
             res.status(200).json({
                 success: true,
-                message: "User logged in successfully"
+                message: "User logged in successfully",
+                authtoken
             });
         });
     } catch (error) {
