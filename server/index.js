@@ -19,7 +19,7 @@ app.use(
         saveUninitialized: true,  // Save uninitialized sessions
         cookie: {
             httpOnly: true,  // Prevents JavaScript from accessing cookies
-            secure: true,  // Set to true if using HTTPS
+            secure: false,  // Set to true if using HTTPS
             maxAge: 24 * 60 * 60 * 1000 * 4,  // 1 day for session expiration
         }
     })
