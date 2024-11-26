@@ -479,7 +479,9 @@ app.post('/reset-session', (req, res) => {
 });
 
 app.get('/isAuthenticated', async (req, res) => {
-    console.log("isAuth me cookies mila " , req.cookies);
+    console.log("isAuth me cookies mila ");
+    console.log(req.cookies);
+    console.log(req.headers);
     const token = req.cookies.token; // Get token from the HTTP-only cookie
 
     if (!token) {
