@@ -479,9 +479,8 @@ app.post('/reset-session', (req, res) => {
 });
 
 app.get('/isAuthenticated', async (req, res) => {
-    console.log("isAuth me request aai")
+    console.log("isAuth me cookies mila " , req.cookies);
     const token = req.cookies.token; // Get token from the HTTP-only cookie
-    console.log("isAuth me token mila " , token)
 
     if (!token) {
         return res.status(401).json({
@@ -663,7 +662,6 @@ app.delete('/api/user', async (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-    console.log("Request aai bhai")
     try {
         // Step 1: Find the user by email
         let user = await User.findOne({ email: req.body.email });
