@@ -18,7 +18,7 @@ app.use(
         resave: false,  // Do not save session if it is unmodified
         saveUninitialized: true,  // Save uninitialized sessions
         cookie: {
-            httpOnly: true,  // Prevents JavaScript from accessing cookies
+            // httpOnly: true,  // Prevents JavaScript from accessing cookies
             secure: false,  // Set to true if using HTTPS
             maxAge: 24 * 60 * 60 * 1000 * 4,  // 1 day for session expiration
         }
@@ -28,7 +28,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import csv from 'csvtojson';
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__filename);  
 const API = process.env.API;
 // database
 mongoose.connect(`mongodb+srv://${process.env.MONGO_ME}:${process.env.MONGODB_PW}@${process.env.CLUSTER2}.cwige.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.CLUSTER}`)
@@ -39,7 +39,7 @@ app.use(cors(
         credentials: true, 
         // adding multiple origins
         origin: 'https://cine-ecstasy-v2.vercel.app',
-        origin: 'http://localhost:5173'
+        // origin: 'http://localhost:5173'                                                          
     }));
 app.use(cookieParser());
 app.use(express.json())
@@ -177,7 +177,8 @@ app.get('/api/leaderboard', async (req, res) => {
                 // console.log(user);
                 if (user == null) {
                     res.cookie('token', '', {
-                        expires: new Date(0), httpOnly: true
+                        expires: new Date(0), 
+                        // httpOnly: true
                     });
                     return res.status(401).json({
                         success: false,
@@ -281,9 +282,8 @@ app.post('/register', async (req, res) => {
 
             // Set the token in an HTTP-only cookie
             res.cookie('token', authtoken, {
-                httpOnly: true, // Prevent JavaScript from accessing the token
+                // httpOnly: true, // Prevent JavaScript from accessing the token
                 secure: false,
-                sameSite: 'strict', // Helps mitigate CSRF attacks
                 maxAge: 3600000 * 24
             });
 
@@ -301,7 +301,9 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-    res.cookie('token', '', { expires: new Date(0), httpOnly: true });
+    res.cookie('token', '', { expires: new Date(0), 
+        // httpOnly: true 
+    });
     res.status(200).json({ message: "Logout successful" });
 })
 
@@ -477,7 +479,9 @@ app.post('/reset-session', (req, res) => {
 });
 
 app.get('/isAuthenticated', async (req, res) => {
+    console.log("isAuth me request aai")
     const token = req.cookies.token; // Get token from the HTTP-only cookie
+    console.log("isAuth me token mila " , token)
 
     if (!token) {
         return res.status(401).json({
@@ -493,7 +497,8 @@ app.get('/isAuthenticated', async (req, res) => {
         // console.log(user);
         if (user == null) {
             res.cookie('token', '', {
-                expires: new Date(0), httpOnly: true
+                expires: new Date(0),
+                //  httpOnly: true
             });
             // console.log("User not found");
             return res.status(401).json({
@@ -532,7 +537,8 @@ app.put('/api/user', async (req, res) => {
         // console.log(user);
         if (user == null) {
             res.cookie('token', '', {
-                expires: new Date(0), httpOnly: true
+                expires: new Date(0), 
+                // httpOnly: true
             });
             // console.log("User not found");
             return res.status(401).json({
@@ -570,7 +576,8 @@ app.put('/api/user/password', async (req, res) => {
         // console.log(user);
         if (user == null) {
             res.cookie('token', '', {
-                expires: new Date(0), httpOnly: true
+                expires: new Date(0), 
+                // httpOnly: true
             });
             // console.log("User not found");
             return res.status(401).json({
@@ -656,6 +663,7 @@ app.delete('/api/user', async (req, res) => {
 
 
 app.post('/login', async (req, res) => {
+    console.log("Request aai bhai")
     try {
         // Step 1: Find the user by email
         let user = await User.findOne({ email: req.body.email });
@@ -695,9 +703,8 @@ app.post('/login', async (req, res) => {
 
             // Step 4: Set the token in an HTTP-only cookie
             res.cookie('token', authtoken, {
-                httpOnly: true, // Prevent JavaScript from accessing the token
+                // httpOnly: true, // Prevent JavaScript from accessing the token
                 secure: false, // Set to true if using HTTPS
-                sameSite: 'strict', // Helps mitigate CSRF attacks
                 maxAge: 3600000 * 24 // 24 hours
             });
 
@@ -705,6 +712,7 @@ app.post('/login', async (req, res) => {
             res.status(200).json({
                 success: true,
                 message: "User logged in successfully",
+                token: authtoken
             });
         });
     } catch (error) {
