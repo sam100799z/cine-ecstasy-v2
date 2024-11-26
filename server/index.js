@@ -38,8 +38,8 @@ app.use(cors(
     {
         credentials: true, 
         // adding multiple origins
-        origin: 'https://cine-ecstasy-v2.vercel.app',
-        // origin: 'http://localhost:5173'                                                          
+        // origin: 'https://cine-ecstasy-v2.vercel.app',
+        origin: 'http://localhost:5173'                                                          
     }));
 app.use(cookieParser());
 app.use(express.json())
@@ -479,7 +479,6 @@ app.post('/reset-session', (req, res) => {
 });
 
 app.get('/isAuthenticated', async (req, res) => {
-    console.log("isAuth me cookies mila ");
     console.log(req.cookies);
     console.log(req.headers);
     const token = req.cookies.token; // Get token from the HTTP-only cookie
